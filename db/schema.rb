@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150307205731) do
+ActiveRecord::Schema.define(version: 20150321202239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,13 @@ ActiveRecord::Schema.define(version: 20150307205731) do
   end
 
   add_index "admin_users", ["username"], name: "index_admin_users_on_username", using: :btree
+
+  create_table "admin_users_pages", id: false, force: :cascade do |t|
+    t.integer "admin_user_id"
+    t.integer "page_id"
+  end
+
+  add_index "admin_users_pages", ["admin_user_id", "page_id"], name: "index_admin_users_pages_on_admin_user_id_and_page_id", using: :btree
 
   create_table "pages", force: :cascade do |t|
     t.integer  "subject_id"
